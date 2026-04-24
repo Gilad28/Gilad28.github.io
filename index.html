@@ -1,135 +1,337 @@
 <!DOCTYPE HTML>
 <!--
-	Astral by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Originally "Astral" by HTML5 UP (html5up.net, CCA 3.0).
+	Heavily customized for Gilad Heitner.
 -->
-<html>
+<html lang="en">
 	<head>
-		<title>Astral by HTML5 UP</title>
+		<title>Gilad Heitner</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Gilad Heitner – software engineer. Projects, experiments and ways to get in touch." />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* ---- Custom tweaks on top of the (light-themed) Astral panels ---- */
+
+			/* About-section tag pills (on white panel) */
+			.about-tags { margin-top: 0.5em; }
+			.about-tags .tag {
+				display: inline-block;
+				font-size: 0.7em;
+				padding: 0.25em 0.7em;
+				margin: 0 0.3em 0.4em 0;
+				border-radius: 999px;
+				background: #f0f3f7;
+				color: #4a5466;
+				border: 1px solid #e1e6ee;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+				line-height: 1.6;
+			}
+
+			/* Project card grid */
+			.projects {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 1.1rem;
+				margin-top: 1.5rem;
+			}
+			@media screen and (max-width: 980px) { .projects { grid-template-columns: repeat(2, 1fr); } }
+			@media screen and (max-width: 640px) { .projects { grid-template-columns: 1fr; } }
+
+			.project {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				padding: 1.1rem 1.25rem 1rem;
+				border-radius: 10px;
+				background: linear-gradient(160deg, #1f2540 0%, #161a2e 100%);
+				border: 1px solid #2a3157;
+				color: #e6e9f5;
+				box-shadow: 0 6px 18px rgba(20, 25, 50, 0.18);
+				transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+				min-height: 160px;
+			}
+			.project:hover {
+				transform: translateY(-3px);
+				border-color: #5d6df0;
+				box-shadow: 0 10px 24px rgba(60, 80, 200, 0.28);
+			}
+			.project h3 {
+				margin: 0 0 0.4rem;
+				font-size: 1.05rem;
+				letter-spacing: 0.04em;
+				color: #ffffff;
+			}
+			.project h3 a {
+				color: #ffffff !important;
+				border: none !important;
+				text-decoration: none !important;
+				background: none !important;
+			}
+			.project h3 a:hover { color: #8ad7ff !important; }
+			.project p {
+				margin: 0 0 0.9rem;
+				font-size: 0.9rem;
+				line-height: 1.55;
+				color: rgba(230, 233, 245, 0.78);
+			}
+			.project .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+			.project .tag {
+				font-size: 0.68rem;
+				padding: 0.22rem 0.6rem;
+				border-radius: 999px;
+				background: rgba(138, 215, 255, 0.14);
+				color: #c8e9ff;
+				border: 1px solid rgba(138, 215, 255, 0.3);
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				line-height: 1.4;
+			}
+			.project .tag.py     { background: rgba(255, 211, 102, 0.14); border-color: rgba(255, 211, 102, 0.35); color: #ffe6a8; }
+			.project .tag.js     { background: rgba(255, 229, 102, 0.14); border-color: rgba(255, 229, 102, 0.35); color: #fff1a8; }
+			.project .tag.c      { background: rgba(160, 160, 255, 0.16); border-color: rgba(160, 160, 255, 0.35); color: #d7d7ff; }
+			.project .tag.java   { background: rgba(255, 140, 120, 0.16); border-color: rgba(255, 140, 120, 0.35); color: #ffd1c7; }
+			.project .tag.docker { background: rgba(100, 180, 255, 0.16); border-color: rgba(100, 180, 255, 0.35); color: #cfe7ff; }
+			.project .tag.ai     { background: rgba(200, 182, 255, 0.18); border-color: rgba(200, 182, 255, 0.4);  color: #e4d9ff; }
+
+			/* Contact buttons (matching the dark project cards) */
+			.contact-links {
+				list-style: none;
+				padding: 0;
+				margin: 1.5rem 0 0;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.85rem;
+			}
+			.contact-links a {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.7rem;
+				padding: 0.85rem 1.4rem;
+				border-radius: 10px;
+				background: linear-gradient(160deg, #1f2540 0%, #161a2e 100%);
+				border: 1px solid #2a3157;
+				color: #ffffff !important;
+				font-weight: 600;
+				font-size: 0.95rem;
+				letter-spacing: 0.02em;
+				text-decoration: none !important;
+				box-shadow: 0 6px 18px rgba(20, 25, 50, 0.18);
+				transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+			}
+			.contact-links a:hover {
+				transform: translateY(-2px);
+				border-color: #5d6df0;
+				box-shadow: 0 10px 24px rgba(60, 80, 200, 0.3);
+				color: #ffffff !important;
+			}
+			.contact-links a .icon { color: #8ad7ff; font-size: 1.05em; }
+			.contact-links a .icon:before { font-size: 1em; }
+
+			/* Make contact panel intro paragraph a touch bigger */
+			#contact > p { font-size: 1.05em; color: #4a5466; }
+		</style>
 	</head>
 	<body class="is-preload">
 
-		<!-- Wrapper-->
-			<div id="wrapper">
+		<div id="wrapper">
 
-				<!-- Nav -->
-					<nav id="nav">
-						<a href="#" class="icon solid fa-home"><span>Home</span></a>
-						<a href="#work" class="icon solid fa-folder"><span>Work</span></a>
-						<a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a>
-						<a href="https://twitter.com/ajlkn" class="icon brands fa-twitter"><span>Twitter</span></a>
-					</nav>
+			<!-- Nav -->
+				<nav id="nav">
+					<a href="#home" class="icon solid fa-home"><span>Home</span></a>
+					<a href="#about" class="icon solid fa-user"><span>About</span></a>
+					<a href="#work" class="icon solid fa-code"><span>Projects</span></a>
+					<a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a>
+					<a href="https://github.com/Gilad28" class="icon brands fa-github" target="_blank" rel="noopener"><span>GitHub</span></a>
+					<a href="https://www.linkedin.com/in/gilad-heitner-0253a3293/" class="icon brands fa-linkedin-in" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+				</nav>
 
-				<!-- Main -->
-					<div id="main">
+			<!-- Main -->
+				<div id="main">
 
-						<!-- Me -->
-							<article id="home" class="panel intro">
-								<header>
-									<h1>Jane Doe</h1>
-									<p>Senior Astral Projectionist</p>
-								</header>
-								<a href="#work" class="jumplink pic">
-									<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
-									<img src="images/me.jpg" alt="" />
-								</a>
-							</article>
+					<!-- Home -->
+						<article id="home" class="panel intro">
+							<header>
+								<h1>Gilad Heitner</h1>
+								<p>Software engineer &middot; builder of real-time systems, AI tools and the occasional spreadsheet engine</p>
+							</header>
+							<a href="#about" class="jumplink pic">
+								<span class="arrow icon solid fa-chevron-right"><span>More about me</span></span>
+								<img src="images/me.jpg" alt="Gilad Heitner" />
+							</a>
+						</article>
 
-						<!-- Work -->
-							<article id="work" class="panel">
-								<header>
-									<h2>Work</h2>
-								</header>
-								<p>
-									Phasellus enim sapien, blandit ullamcorper elementum eu, condimentum eu elit.
-									Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-									luctus elit eget interdum.
-								</p>
-								<section>
-									<div class="row">
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic01.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic02.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic03.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic04.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic05.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic06.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic08.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic09.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic10.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic11.jpg" alt=""></a>
-										</div>
-										<div class="col-4 col-6-medium col-12-small">
-											<a href="#" class="image fit"><img src="images/pic12.jpg" alt=""></a>
-										</div>
-									</div>
-								</section>
-							</article>
+					<!-- About -->
+						<article id="about" class="panel">
+							<header>
+								<h2>About</h2>
+							</header>
+							<p>
+								Hi, I'm Gilad. I like building things end-to-end &mdash; from low-level systems in C,
+								to real-time JavaScript services, to Python ML and AI projects. Most of what you'll
+								see here started as a class project, a hackathon, or a late-night curiosity that got
+								out of hand.
+							</p>
+							<p>
+								Current interests: distributed systems, applied AI, and developer tooling. Always open
+								to collaborating on something cool &mdash; reach out via
+								<a href="https://www.linkedin.com/in/gilad-heitner-0253a3293/" target="_blank" rel="noopener">LinkedIn</a>
+								or <a href="https://github.com/Gilad28" target="_blank" rel="noopener">GitHub</a>.
+							</p>
+							<h3>Tech I reach for</h3>
+							<div class="about-tags">
+								<span class="tag">Python</span>
+								<span class="tag">JavaScript / Node</span>
+								<span class="tag">C / C++</span>
+								<span class="tag">Java</span>
+								<span class="tag">Docker</span>
+								<span class="tag">Git &amp; CI</span>
+								<span class="tag">ML / AI</span>
+							</div>
+						</article>
 
-						<!-- Contact -->
-							<article id="contact" class="panel">
-								<header>
-									<h2>Contact Me</h2>
-								</header>
-								<form action="#" method="post">
+					<!-- Projects -->
+						<article id="work" class="panel">
+							<header>
+								<h2>Projects</h2>
+							</header>
+							<p>
+								A selection of things I've built. More on
+								<a href="https://github.com/Gilad28" target="_blank" rel="noopener">GitHub</a>.
+							</p>
+
+							<div class="projects">
+
+								<div class="project">
 									<div>
-										<div class="row">
-											<div class="col-6 col-12-medium">
-												<input type="text" name="name" placeholder="Name" />
-											</div>
-											<div class="col-6 col-12-medium">
-												<input type="text" name="email" placeholder="Email" />
-											</div>
-											<div class="col-12">
-												<input type="text" name="subject" placeholder="Subject" />
-											</div>
-											<div class="col-12">
-												<textarea name="message" placeholder="Message" rows="6"></textarea>
-											</div>
-											<div class="col-12">
-												<input type="submit" value="Send Message" />
-											</div>
-										</div>
+										<h3><a href="https://github.com/Gilad28/RecruitAI" target="_blank" rel="noopener">RecruitAI</a></h3>
+										<p>AI-assisted recruiting tool that helps screen and match candidates to roles.</p>
 									</div>
-								</form>
-							</article>
+									<div class="tags">
+										<span class="tag py">Python</span>
+										<span class="tag ai">AI</span>
+									</div>
+								</div>
 
-					</div>
+								<div class="project">
+									<div>
+										<h3><a href="https://github.com/Gilad28/Real-Time-Multi-Client-Chat-Server" target="_blank" rel="noopener">Real-Time Chat Server</a></h3>
+										<p>Multi-client chat server with live message broadcast and room support.</p>
+									</div>
+									<div class="tags">
+										<span class="tag js">JavaScript</span>
+										<span class="tag">WebSockets</span>
+									</div>
+								</div>
 
-				<!-- Footer -->
-					<div id="footer">
-						<ul class="copyright">
-							<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</div>
+								<div class="project">
+									<div>
+										<h3><a href="https://github.com/Gilad28/LoadBalancer" target="_blank" rel="noopener">Load Balancer</a></h3>
+										<p>Low-level load balancer written in C, distributing requests across worker backends.</p>
+									</div>
+									<div class="tags">
+										<span class="tag c">C</span>
+										<span class="tag">Systems</span>
+									</div>
+								</div>
 
-			</div>
+								<div class="project">
+									<div>
+										<h3><a href="https://github.com/Gilad28/SpreadSheetEngine" target="_blank" rel="noopener">Spreadsheet Engine</a></h3>
+										<p>Formula parser and dependency-tracking spreadsheet engine with live recomputation.</p>
+									</div>
+									<div class="tags">
+										<span class="tag java">Java</span>
+										<span class="tag">Parsing</span>
+									</div>
+								</div>
+
+								<div class="project">
+									<div>
+										<h3><a href="https://github.com/Gilad28/DogBreeds-ML" target="_blank" rel="noopener">Dog Breeds ML</a></h3>
+										<p>Image classifier that identifies dog breeds using a trained deep-learning model.</p>
+									</div>
+									<div class="tags">
+										<span class="tag py">Python</span>
+										<span class="tag ai">ML</span>
+									</div>
+								</div>
+
+								<div class="project">
+									<div>
+										<h3><a href="https://github.com/Gilad28/SpaceAIHackathonProject" target="_blank" rel="noopener">Space AI Hackathon</a></h3>
+										<p>Hackathon project exploring AI applied to space / mission data.</p>
+									</div>
+									<div class="tags">
+										<span class="tag js">JavaScript</span>
+										<span class="tag ai">AI</span>
+									</div>
+								</div>
+
+								<div class="project">
+									<div>
+										<h3><a href="https://github.com/Gilad28/HelpBot" target="_blank" rel="noopener">HelpBot</a></h3>
+										<p>Python chatbot that answers user questions from a configurable knowledge base.</p>
+									</div>
+									<div class="tags">
+										<span class="tag py">Python</span>
+										<span class="tag">Bot</span>
+									</div>
+								</div>
+
+								<div class="project">
+									<div>
+										<h3><a href="https://github.com/Gilad28/java-docker-ci" target="_blank" rel="noopener">Java + Docker CI</a></h3>
+										<p>Dockerized Java app with a full CI pipeline &mdash; build, test, containerize.</p>
+									</div>
+									<div class="tags">
+										<span class="tag java">Java</span>
+										<span class="tag docker">Docker</span>
+										<span class="tag">CI</span>
+									</div>
+								</div>
+
+								<div class="project">
+									<div>
+										<h3><a href="https://github.com/Gilad28/LeetCodePractice" target="_blank" rel="noopener">LeetCode / NeetCode</a></h3>
+										<p>Ongoing algorithms &amp; data-structures practice submissions.</p>
+									</div>
+									<div class="tags">
+										<span class="tag py">Python</span>
+										<span class="tag">Algorithms</span>
+									</div>
+								</div>
+
+							</div>
+						</article>
+
+					<!-- Contact -->
+						<article id="contact" class="panel">
+							<header>
+								<h2>Get in touch</h2>
+							</header>
+							<p>
+								The best ways to reach me:
+							</p>
+							<ul class="contact-links">
+								<li><a href="https://www.linkedin.com/in/gilad-heitner-0253a3293/" target="_blank" rel="noopener"><span class="icon brands fa-linkedin-in"></span> LinkedIn</a></li>
+								<li><a href="https://github.com/Gilad28" target="_blank" rel="noopener"><span class="icon brands fa-github"></span> GitHub</a></li>
+							</ul>
+						</article>
+
+				</div>
+
+			<!-- Footer -->
+				<div id="footer">
+					<ul class="copyright">
+						<li>&copy; 2026 Gilad Heitner.</li>
+						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+
+		</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
